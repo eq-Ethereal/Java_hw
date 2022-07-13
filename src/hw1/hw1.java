@@ -30,12 +30,13 @@ public class hw1 {
         Pattern pattern = Pattern.compile("<client>(.+?)<data>(.+?)<\\/data>");
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) {
-            mainMatchGroup = matcher.group(2);
             subMatchGroup = matcher.group(1);
+            mainMatchGroup = matcher.group(2);
         }
+
         String[] strings = mainMatchGroup.split(";");
 
-        if (strings.length > 0) {
+        if (!strings[0].matches("")) {
             for (int i = 0; i < strings.length; i++) {
                 if (strings[i].matches(PHONE_REGEXP)) {
                     StringBuilder phone = new StringBuilder(strings[i].replaceAll("[ +()-]", ""));
@@ -70,9 +71,12 @@ public class hw1 {
                 }
             }
         } else {
-            return "<client>" + subMatchGroup + "<data></data></client>";
+            Pattern pattern1 = Pattern.compile("<client>(.+?)<data>");
+            matcher = pattern1.matcher(text);
+            if (matcher.find()) {
+                return "<client>" + matcher.group(1) + "<data></data></client>";
+            }
         }
-        return "<client>" + subMatchGroup + "<data>" + Arrays.toString(strings).replaceAll("[\\[\\]]", "")
-                .replaceAll(",", ";") + "</data></client>";
+        return "Masked string is : <client>" + subMatchGroup + "<data>" + Arrays.toString(strings).replaceAll("[\\[\\]]", "") + "</data></client>";
     }
 }
