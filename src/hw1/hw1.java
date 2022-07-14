@@ -11,10 +11,19 @@ public class hw1 {
     public static final String FIO_SHIT_REGEXP = ".+([а-я]) .+([а-я]).+([а-я])";
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Input xml string");
-        String unMaskedString = scanner.nextLine();
-        //String unMaskedString = "<client>(Какие то данные)<data>799 911-13344;test@yandex.ru;Иванов Иван Иванович</data></client>";
+        String unMaskedString = "<client>(Какие то данные)<data>799 911-13344;test@yandex.ru;Иванов Иван Иванович</data></client>";
+        System.out.println("Inputted String is : " + unMaskedString);
+        System.out.println(makeMyDataMasked(unMaskedString));
+
+        unMaskedString = "<client>(Какие то данные)<data></data></client>";
+        System.out.println("Inputted String is : " + unMaskedString);
+        System.out.println(makeMyDataMasked(unMaskedString));
+
+        unMaskedString = "<client>(Какие то данные)<data>Иванов Иван Иванович;79991113344</data></client>";
+        System.out.println("Inputted String is : " + unMaskedString);
+        System.out.println(makeMyDataMasked(unMaskedString));
+
+        unMaskedString = "";
         System.out.println("Inputted String is : " + unMaskedString);
         System.out.println(makeMyDataMasked(unMaskedString));
     }
